@@ -1,0 +1,82 @@
+﻿/* Application header styling */
+.header-top {
+    background-color: #343a40;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 200px;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    background-color: #f8f9fa;
+    height: calc(100vh - 70px);
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+    /* Sidebar links */
+    .sidebar a {
+        display: block;
+        padding: 12px 20px;
+        color: #333;
+        text-decoration: none;
+        font-size: 16px;
+        margin: 0;
+    }
+
+        .sidebar a:hover {
+            background-color: #e9ecef;
+        }
+
+/* Content area styling */
+.content-area {
+    margin-left: 220px;
+    padding: 20px;
+    padding-top: 90px;
+    width: calc(100% - 220px);
+    box-sizing: border-box;
+}
+
+/* Content Header (blue background) */
+.content-header {
+    background-color: #007bff; /* Blue background */
+    color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+    /* Content Header data points styling */
+    .content-header .data-points {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+        .content-header .data-points .data-point {
+            flex: 1;
+            text-align: center;
+        }
+
+/* Property names and values styling */
+.data-point .property-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.data-point .property-value {
+    font-size: 18px;
+}

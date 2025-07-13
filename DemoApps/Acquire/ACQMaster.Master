@@ -1,0 +1,222 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ACQMaster.master.cs" Inherits="DemoApps.Acquire.ACQMaster" %>
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>ACQUIRE game helper</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
+    <asp:ContentPlaceHolder ID="cphHead" runat="server">
+        <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css' />
+    </asp:ContentPlaceHolder>
+
+    <link href="~/FavIconSEM.png" rel="shortcut icon" type="image/x-icon" />
+
+
+</head>
+<body class="skin-black" style="padding-top: 0 !important;">
+
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+
+        <!-- header logo: style can be found in header.less -->
+        <header class="header">
+            
+            
+            <%--<a href="default.aspx" class="logo" style="font-size: 20px; line-height: 50px; text-align: center; padding: 0 10px; width: 100%; font-family: 'Kaushan Script', cursive; font-weight: 500; height: 50px; display: inline-block;">GDSI
+                <img style="max-height: 35px" src="img/logoShadow.png" />
+            </a>--%>
+
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation" style="z-index: 1 !important; margin-bottom: 0 !important">
+                <!-- Sidebar toggle button-->
+                <!-- <img src="img/header.jpg"/>
+                -->
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button" style="float: left; padding: 9px 5px; margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 5px; background-color: transparent; background-image: none; border: 1px solid transparent; -webkit-border-radius: 0 !important; -moz-border-radius: 0 !important; border-radius: 0 !important; position: absolute;">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar" style="display: block; width: 22px; height: 2px; margin-bottom: 4px;"></span>
+                    <span class="icon-bar" style="display: block; width: 22px; height: 2px; margin-bottom: 4px;"></span>
+                    <span class="icon-bar" style="display: block; width: 22px; height: 2px; margin-bottom: 4px;"></span>
+                </a>
+
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user"></i>
+                                <span>
+                                    <asp:Literal ID="litUser" runat="server"></asp:Literal>
+                                    <i class="caret"></i></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                                <li class="dropdown-header text-center">Account</li>
+
+
+                                <li>
+                                    <asp:HyperLink ID="hypLogin" runat="server" Text="Prijava" NavigateUrl="Login.aspx"></asp:HyperLink>
+                                    <asp:HyperLink ID="hypLogout" runat="server" Text="Logout" NavigateUrl="default.aspx?Logout=true"></asp:HyperLink>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- header END -->
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="left-side sidebar-offcanvas">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel hidden">
+                        <div class="pull-left image">
+                            <%--Profile image--%>
+                            <%--<img src="img/DG.jpg" class="img-circle" alt="User Image" />--%>
+                        </div>
+                        <div class="pull-left info">
+                            <p>Danko</p>
+
+                            <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
+                        </div>
+                    </div>
+                    <!-- search form -->
+                    <div class="sidebar-form">
+                        <div class="input-group">
+                            <%--<input type="text" name="trazi" id="txtTrazi" class="form-control" placeholder="Traži igrača..." />
+                            <span class="input-group-btn">
+                                <button type="button" name='trazi' id='search-btn' class="btn btn-flat" onclick="traziIgrac()"><i class="fa fa-search"></i></button>
+                            </span>
+                                --%>
+                        </div>
+                    </div>
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+
+                    <asp:Literal ID="litMenu" runat="server" ClientIDMode="Static"></asp:Literal>
+
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+            <aside class="right-side">
+
+                <!-- Main content -->
+                <section class="content">
+
+                    <div class="row m-b-15">
+
+                        <div class="col-lg-12" style="text-align: center">
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <!--<ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                      </ol>-->
+
+                                <!-- Wrapper for slides -->
+                                <%--<div class="carousel-inner center-block" role="listbox">
+                                    <div class="item active">
+                                        <img src="img/1.jpg" alt="..." />
+                                        <!--<div class="carousel-caption">
+                           <a href="#">SPONZORI</a>
+                          </div>-->
+                                    </div>
+                                    <div class="item">
+                                        <img src="img/2.jpg" alt="..." />
+                                        <!-- <div class="carousel-caption">
+                            ...
+                          </div>-->
+                                    </div>
+                                    <div class="item">
+                                        <img src="img/3.jpg" alt="..." />
+                                        <!-- <div class="carousel-caption">
+                            ...
+                          </div>-->
+                                    </div>
+
+                                </div>--%>
+
+
+
+                                <!-- Controls -->
+                                <!-- <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                          </a>-->
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div id="divError" runat="server" visible="false" class="alert alert-danger" role="alert">
+                        <asp:Label ID="lblError" runat="server"></asp:Label>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!--<h1 class="page-header">
+                          MOJ PROFIL
+                        </h1>-->
+                            <ol class="breadcrumb hidden">
+                                <li>
+                                    <i class="fa fa-dashboard"></i><a href="default.aspx">Index</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-dashboard"></i><a href="PrijaviRezultat.aspx">Prijavi rezultat</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-dashboard"></i><a href="Login.aspx">Login</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-dashboard"></i><a href="UnosSusretKalendar.aspx">UnosSusretKalendar</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </section>
+                <!-- /.content -->
+
+            </aside>
+            <!-- /.right-side -->
+
+        </div>
+
+    </form>
+
+
+
+    <asp:ContentPlaceHolder ID="cphBbodyEnd" runat="server"></asp:ContentPlaceHolder>
+    <!-- place holder for js files that need to be in body, but loaded before custom page js -->
+    <asp:ContentPlaceHolder ID="cphCustomPageScript" runat="server">
+    </asp:ContentPlaceHolder>
+    <!-- placeholder for custom page js -->
+
+    
+			<script type="text/javascript">
+				function AreYouSure() {
+					if (confirm('Are you sure ?')) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+            </script>
+
+</body>
+</html>

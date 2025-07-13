@@ -1,0 +1,251 @@
+﻿body
+{
+    background-image:url("images/back1.jpg");
+}
+
+.bgsmoke
+{
+    background-color:#f5f5f5
+}
+.bgsilver
+{
+    background-color:silver
+}
+.bggold
+{
+    background-color:palegoldenrod
+}
+.h1000{
+    height:5000px;
+}
+
+.centerCell {
+   text-align: center;   
+}
+
+.hidden{
+    display:none;
+}
+
+.marginTop{
+    margin-top:20px;
+}
+
+.long {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zadnjiRezultatImeCell
+{
+    width:275px;
+}
+
+.tablicaImeCell
+{
+    width:155px;
+}
+
+
+.cellSpacing10{
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+.cellSpacing3{
+    border-spacing: 3px;
+    border-collapse: separate;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.glyphicon.glyphicon-pencil {
+    font-size: 30px;
+}
+
+.glyphicon.glyphicon-comment {
+    font-size: 30px;
+}
+
+.paddingCenter{
+    padding:100px
+}
+
+.marginLogin{
+    margin-top:50px;
+    margin-left:200px;
+    margin-right:200px;
+}
+
+.marginAlerts{
+    margin-left:100px;
+    margin-right:100px;
+}
+
+.clickableIgrac
+{
+    cursor:pointer;
+    cursor:hand;
+    /*color:#4697CE;
+    font-weight:bold;*/
+}
+.borderless td, .borderless th {
+    border: none;
+}
+.alignRight
+{
+    text-align:right;
+}
+.ligaTitleLink
+{
+    cursor:pointer;
+    cursor:hand;
+}
+.hand
+{
+    cursor:pointer;
+    cursor:hand;
+}
+.setBroj
+{
+    width:60px;
+}
+.topLayer
+{
+    z-index:10;
+}
+
+/*Sakriva srelice na unosu brojeva (setovi)*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.unosRezSet
+{
+    padding-left:3px;
+    padding-right:3px;
+}
+.imgPlayer
+{
+    width:300px;
+}
+.zadnjiRezultatTable
+{
+    margin-bottom:20px;
+}
+table.table.table-condensed {
+    border: 1px solid #ddd;
+}
+.borderless td, .borderless th {
+    border: none;
+}
+.table-borderless tbody tr td,
+.table-borderless tbody tr th,
+.table-borderless thead tr th,
+.table-borderless thead tr td,
+.table-borderless tfoot tr th,
+.table-borderless tfoot tr td {
+    border: none;
+}
+
+
+
+.tableE {
+    width: 100%;
+    /*table-layout: fixed;*/
+}
+.tdE {
+    /*display: block;*/
+    /*width:200px;*/
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.td70{
+    width: 70%;
+}
+.td60{
+    width: 60%;
+}
+.td50{
+    width: 50%;
+}
+.td45{
+    width: 45%;
+}
+.td42{
+    width: 42%;
+}
+.td40{
+    width: 40%;
+}
+.td35{
+    width: 20%;
+}
+.td30{
+    width: 30%;
+}
+.td20{
+    width: 20%;
+}
+.td16{
+    width: 16%;
+}
+.td10{
+    width: 10%;
+}
+
+.bold
+{
+    font-weight:bold;
+}
+
+.bgGray
+{
+    background-color:#f3f4f5;
+}
+.borderGray
+{
+    border: 1px solid #ddd;
+}
+.padding8
+{
+    padding:8px;
+}
+
+.infoLabel
+{
+    font-weight:bold;
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 40%;
+    text-align:left;
+}
+.infoValue
+{
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 60%;
+    text-align:right;
+}
+.span50 {
+  display: inline-block;
+  width: 45%;
+}
+
+.bgcolorNone{
+    background-color:#f0f3f4;
+}
