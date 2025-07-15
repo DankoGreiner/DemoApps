@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DemoAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACQBuildingCount">
+          <Key>
+            <PropertyRef Name="ACQBuildingCountId" />
+          </Key>
+          <Property Name="ACQBuildingCountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACQGameId" Type="int" Nullable="false" />
+          <Property Name="ACQHotelChainId" Type="int" Nullable="false" />
+          <Property Name="BuildingCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACQGame">
+          <Key>
+            <PropertyRef Name="ACQGameId" />
+          </Key>
+          <Property Name="ACQGameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GameStart" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACQGameMode">
+          <Key>
+            <PropertyRef Name="ACQGameMode" />
+          </Key>
+          <Property Name="ACQGameMode" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACQHotelChain">
+          <Key>
+            <PropertyRef Name="ACQHotelChainId" />
+          </Key>
+          <Property Name="ACQHotelChainId" Type="int" Nullable="false" />
+          <Property Name="HotelChainName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HotelChainColor" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ACQPlayer">
+          <Key>
+            <PropertyRef Name="ACQPlayerId" />
+          </Key>
+          <Property Name="ACQPlayerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACQGameId" Type="int" Nullable="false" />
+          <Property Name="PlayerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACQPlayerStock">
+          <Key>
+            <PropertyRef Name="ACQPlayerStockId" />
+          </Key>
+          <Property Name="ACQPlayerStockId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACQPlayerId" Type="int" Nullable="false" />
+          <Property Name="ACQHotelChainId" Type="int" Nullable="false" />
+          <Property Name="StockCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACQStockholderInfo">
+          <Key>
+            <PropertyRef Name="ACQStockholderInfoId" />
+          </Key>
+          <Property Name="ACQStockholderInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACQHotelChainId" Type="int" Nullable="false" />
+          <Property Name="SizeFrom" Type="int" Nullable="false" />
+          <Property Name="SizeTo" Type="int" Nullable="false" />
+          <Property Name="StockPrice" Type="int" Nullable="false" />
+          <Property Name="PrimaryHolder" Type="int" Nullable="false" />
+          <Property Name="SecondaryHolder" Type="int" Nullable="false" />
+          <Property Name="TertiaryHolder" Type="int" Nullable="false" />
+          <Property Name="ACQGameMode" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationCode" />
+          </Key>
+          <Property Name="ApplicationCode" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="ApplicationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApplicationDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ACQBuildingCount_ACQGame">
+          <End Role="ACQGame" Type="Self.ACQGame" Multiplicity="1" />
+          <End Role="ACQBuildingCount" Type="Self.ACQBuildingCount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQGame">
+              <PropertyRef Name="ACQGameId" />
+            </Principal>
+            <Dependent Role="ACQBuildingCount">
+              <PropertyRef Name="ACQGameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACQBuildingCount_ACQHotelChain">
+          <End Role="ACQHotelChain" Type="Self.ACQHotelChain" Multiplicity="1" />
+          <End Role="ACQBuildingCount" Type="Self.ACQBuildingCount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQHotelChain">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Principal>
+            <Dependent Role="ACQBuildingCount">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACQPlayer_ACQGame">
+          <End Role="ACQGame" Type="Self.ACQGame" Multiplicity="1" />
+          <End Role="ACQPlayer" Type="Self.ACQPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQGame">
+              <PropertyRef Name="ACQGameId" />
+            </Principal>
+            <Dependent Role="ACQPlayer">
+              <PropertyRef Name="ACQGameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACQPlayerStock_ACQHotelChain">
+          <End Role="ACQHotelChain" Type="Self.ACQHotelChain" Multiplicity="1" />
+          <End Role="ACQPlayerStock" Type="Self.ACQPlayerStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQHotelChain">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Principal>
+            <Dependent Role="ACQPlayerStock">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACQPlayerStock_ACQPlayer">
+          <End Role="ACQPlayer" Type="Self.ACQPlayer" Multiplicity="1" />
+          <End Role="ACQPlayerStock" Type="Self.ACQPlayerStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQPlayer">
+              <PropertyRef Name="ACQPlayerId" />
+            </Principal>
+            <Dependent Role="ACQPlayerStock">
+              <PropertyRef Name="ACQPlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACQStockholderInfo_ACQHotelChain">
+          <End Role="ACQHotelChain" Type="Self.ACQHotelChain" Multiplicity="1" />
+          <End Role="ACQStockholderInfo" Type="Self.ACQStockholderInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQHotelChain">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Principal>
+            <Dependent Role="ACQStockholderInfo">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DemoAppModelStoreContainer">
+          <EntitySet Name="ACQBuildingCount" EntityType="Self.ACQBuildingCount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACQGame" EntityType="Self.ACQGame" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACQGameMode" EntityType="Self.ACQGameMode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACQHotelChain" EntityType="Self.ACQHotelChain" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACQPlayer" EntityType="Self.ACQPlayer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACQPlayerStock" EntityType="Self.ACQPlayerStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACQStockholderInfo" EntityType="Self.ACQStockholderInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ACQBuildingCount_ACQGame" Association="Self.FK_ACQBuildingCount_ACQGame">
+            <End Role="ACQGame" EntitySet="ACQGame" />
+            <End Role="ACQBuildingCount" EntitySet="ACQBuildingCount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACQBuildingCount_ACQHotelChain" Association="Self.FK_ACQBuildingCount_ACQHotelChain">
+            <End Role="ACQHotelChain" EntitySet="ACQHotelChain" />
+            <End Role="ACQBuildingCount" EntitySet="ACQBuildingCount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACQPlayer_ACQGame" Association="Self.FK_ACQPlayer_ACQGame">
+            <End Role="ACQGame" EntitySet="ACQGame" />
+            <End Role="ACQPlayer" EntitySet="ACQPlayer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACQPlayerStock_ACQHotelChain" Association="Self.FK_ACQPlayerStock_ACQHotelChain">
+            <End Role="ACQHotelChain" EntitySet="ACQHotelChain" />
+            <End Role="ACQPlayerStock" EntitySet="ACQPlayerStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACQPlayerStock_ACQPlayer" Association="Self.FK_ACQPlayerStock_ACQPlayer">
+            <End Role="ACQPlayer" EntitySet="ACQPlayer" />
+            <End Role="ACQPlayerStock" EntitySet="ACQPlayerStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACQStockholderInfo_ACQHotelChain" Association="Self.FK_ACQStockholderInfo_ACQHotelChain">
+            <End Role="ACQHotelChain" EntitySet="ACQHotelChain" />
+            <End Role="ACQStockholderInfo" EntitySet="ACQStockholderInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DemoAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACQBuildingCount">
+          <Key>
+            <PropertyRef Name="ACQBuildingCountId" />
+          </Key>
+          <Property Name="ACQBuildingCountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACQGameId" Type="Int32" Nullable="false" />
+          <Property Name="ACQHotelChainId" Type="Int32" Nullable="false" />
+          <Property Name="BuildingCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ACQGame" Relationship="Self.FK_ACQBuildingCount_ACQGame" FromRole="ACQBuildingCount" ToRole="ACQGame" />
+          <NavigationProperty Name="ACQHotelChain" Relationship="Self.FK_ACQBuildingCount_ACQHotelChain" FromRole="ACQBuildingCount" ToRole="ACQHotelChain" />
+        </EntityType>
+        <EntityType Name="ACQGame">
+          <Key>
+            <PropertyRef Name="ACQGameId" />
+          </Key>
+          <Property Name="ACQGameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GameStart" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ACQBuildingCounts" Relationship="Self.FK_ACQBuildingCount_ACQGame" FromRole="ACQGame" ToRole="ACQBuildingCount" />
+          <NavigationProperty Name="ACQPlayers" Relationship="Self.FK_ACQPlayer_ACQGame" FromRole="ACQGame" ToRole="ACQPlayer" />
+        </EntityType>
+        <EntityType Name="ACQGameMode">
+          <Key>
+            <PropertyRef Name="ACQGameMode1" />
+          </Key>
+          <Property Name="ACQGameMode1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACQHotelChain">
+          <Key>
+            <PropertyRef Name="ACQHotelChainId" />
+          </Key>
+          <Property Name="ACQHotelChainId" Type="Int32" Nullable="false" />
+          <Property Name="HotelChainName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HotelChainColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ACQBuildingCounts" Relationship="Self.FK_ACQBuildingCount_ACQHotelChain" FromRole="ACQHotelChain" ToRole="ACQBuildingCount" />
+          <NavigationProperty Name="ACQPlayerStocks" Relationship="Self.FK_ACQPlayerStock_ACQHotelChain" FromRole="ACQHotelChain" ToRole="ACQPlayerStock" />
+          <NavigationProperty Name="ACQStockholderInfoes" Relationship="Self.FK_ACQStockholderInfo_ACQHotelChain" FromRole="ACQHotelChain" ToRole="ACQStockholderInfo" />
+        </EntityType>
+        <EntityType Name="ACQPlayer">
+          <Key>
+            <PropertyRef Name="ACQPlayerId" />
+          </Key>
+          <Property Name="ACQPlayerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACQGameId" Type="Int32" Nullable="false" />
+          <Property Name="PlayerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ACQGame" Relationship="Self.FK_ACQPlayer_ACQGame" FromRole="ACQPlayer" ToRole="ACQGame" />
+          <NavigationProperty Name="ACQPlayerStocks" Relationship="Self.FK_ACQPlayerStock_ACQPlayer" FromRole="ACQPlayer" ToRole="ACQPlayerStock" />
+        </EntityType>
+        <EntityType Name="ACQPlayerStock">
+          <Key>
+            <PropertyRef Name="ACQPlayerStockId" />
+          </Key>
+          <Property Name="ACQPlayerStockId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACQPlayerId" Type="Int32" Nullable="false" />
+          <Property Name="ACQHotelChainId" Type="Int32" Nullable="false" />
+          <Property Name="StockCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ACQHotelChain" Relationship="Self.FK_ACQPlayerStock_ACQHotelChain" FromRole="ACQPlayerStock" ToRole="ACQHotelChain" />
+          <NavigationProperty Name="ACQPlayer" Relationship="Self.FK_ACQPlayerStock_ACQPlayer" FromRole="ACQPlayerStock" ToRole="ACQPlayer" />
+        </EntityType>
+        <EntityType Name="ACQStockholderInfo">
+          <Key>
+            <PropertyRef Name="ACQStockholderInfoId" />
+          </Key>
+          <Property Name="ACQStockholderInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACQHotelChainId" Type="Int32" Nullable="false" />
+          <Property Name="SizeFrom" Type="Int32" Nullable="false" />
+          <Property Name="SizeTo" Type="Int32" Nullable="false" />
+          <Property Name="StockPrice" Type="Int32" Nullable="false" />
+          <Property Name="PrimaryHolder" Type="Int32" Nullable="false" />
+          <Property Name="SecondaryHolder" Type="Int32" Nullable="false" />
+          <Property Name="TertiaryHolder" Type="Int32" Nullable="false" />
+          <Property Name="ACQGameMode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ACQHotelChain" Relationship="Self.FK_ACQStockholderInfo_ACQHotelChain" FromRole="ACQStockholderInfo" ToRole="ACQHotelChain" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationCode" />
+          </Key>
+          <Property Name="ApplicationCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApplicationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApplicationDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ACQBuildingCount_ACQGame">
+          <End Role="ACQGame" Type="Self.ACQGame" Multiplicity="1" />
+          <End Role="ACQBuildingCount" Type="Self.ACQBuildingCount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQGame">
+              <PropertyRef Name="ACQGameId" />
+            </Principal>
+            <Dependent Role="ACQBuildingCount">
+              <PropertyRef Name="ACQGameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACQBuildingCount_ACQHotelChain">
+          <End Role="ACQHotelChain" Type="Self.ACQHotelChain" Multiplicity="1" />
+          <End Role="ACQBuildingCount" Type="Self.ACQBuildingCount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQHotelChain">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Principal>
+            <Dependent Role="ACQBuildingCount">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACQPlayer_ACQGame">
+          <End Role="ACQGame" Type="Self.ACQGame" Multiplicity="1" />
+          <End Role="ACQPlayer" Type="Self.ACQPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQGame">
+              <PropertyRef Name="ACQGameId" />
+            </Principal>
+            <Dependent Role="ACQPlayer">
+              <PropertyRef Name="ACQGameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACQPlayerStock_ACQHotelChain">
+          <End Role="ACQHotelChain" Type="Self.ACQHotelChain" Multiplicity="1" />
+          <End Role="ACQPlayerStock" Type="Self.ACQPlayerStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQHotelChain">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Principal>
+            <Dependent Role="ACQPlayerStock">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACQStockholderInfo_ACQHotelChain">
+          <End Role="ACQHotelChain" Type="Self.ACQHotelChain" Multiplicity="1" />
+          <End Role="ACQStockholderInfo" Type="Self.ACQStockholderInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQHotelChain">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Principal>
+            <Dependent Role="ACQStockholderInfo">
+              <PropertyRef Name="ACQHotelChainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACQPlayerStock_ACQPlayer">
+          <End Role="ACQPlayer" Type="Self.ACQPlayer" Multiplicity="1" />
+          <End Role="ACQPlayerStock" Type="Self.ACQPlayerStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACQPlayer">
+              <PropertyRef Name="ACQPlayerId" />
+            </Principal>
+            <Dependent Role="ACQPlayerStock">
+              <PropertyRef Name="ACQPlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DemoAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACQBuildingCounts" EntityType="Self.ACQBuildingCount" />
+          <EntitySet Name="ACQGames" EntityType="Self.ACQGame" />
+          <EntitySet Name="ACQGameModes" EntityType="Self.ACQGameMode" />
+          <EntitySet Name="ACQHotelChains" EntityType="Self.ACQHotelChain" />
+          <EntitySet Name="ACQPlayers" EntityType="Self.ACQPlayer" />
+          <EntitySet Name="ACQPlayerStocks" EntityType="Self.ACQPlayerStock" />
+          <EntitySet Name="ACQStockholderInfoes" EntityType="Self.ACQStockholderInfo" />
+          <EntitySet Name="Applications" EntityType="Self.Application" />
+          <AssociationSet Name="FK_ACQBuildingCount_ACQGame" Association="Self.FK_ACQBuildingCount_ACQGame">
+            <End Role="ACQGame" EntitySet="ACQGames" />
+            <End Role="ACQBuildingCount" EntitySet="ACQBuildingCounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACQBuildingCount_ACQHotelChain" Association="Self.FK_ACQBuildingCount_ACQHotelChain">
+            <End Role="ACQHotelChain" EntitySet="ACQHotelChains" />
+            <End Role="ACQBuildingCount" EntitySet="ACQBuildingCounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACQPlayer_ACQGame" Association="Self.FK_ACQPlayer_ACQGame">
+            <End Role="ACQGame" EntitySet="ACQGames" />
+            <End Role="ACQPlayer" EntitySet="ACQPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACQPlayerStock_ACQHotelChain" Association="Self.FK_ACQPlayerStock_ACQHotelChain">
+            <End Role="ACQHotelChain" EntitySet="ACQHotelChains" />
+            <End Role="ACQPlayerStock" EntitySet="ACQPlayerStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACQStockholderInfo_ACQHotelChain" Association="Self.FK_ACQStockholderInfo_ACQHotelChain">
+            <End Role="ACQHotelChain" EntitySet="ACQHotelChains" />
+            <End Role="ACQStockholderInfo" EntitySet="ACQStockholderInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACQPlayerStock_ACQPlayer" Association="Self.FK_ACQPlayerStock_ACQPlayer">
+            <End Role="ACQPlayer" EntitySet="ACQPlayers" />
+            <End Role="ACQPlayerStock" EntitySet="ACQPlayerStocks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DemoAppModelStoreContainer" CdmEntityContainer="DemoAppEntities">
+          <EntitySetMapping Name="ACQBuildingCounts">
+            <EntityTypeMapping TypeName="DemoAppModel.ACQBuildingCount">
+              <MappingFragment StoreEntitySet="ACQBuildingCount">
+                <ScalarProperty Name="ACQBuildingCountId" ColumnName="ACQBuildingCountId" />
+                <ScalarProperty Name="ACQGameId" ColumnName="ACQGameId" />
+                <ScalarProperty Name="ACQHotelChainId" ColumnName="ACQHotelChainId" />
+                <ScalarProperty Name="BuildingCount" ColumnName="BuildingCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACQGames">
+            <EntityTypeMapping TypeName="DemoAppModel.ACQGame">
+              <MappingFragment StoreEntitySet="ACQGame">
+                <ScalarProperty Name="ACQGameId" ColumnName="ACQGameId" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="GameStart" ColumnName="GameStart" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACQGameModes">
+            <EntityTypeMapping TypeName="DemoAppModel.ACQGameMode">
+              <MappingFragment StoreEntitySet="ACQGameMode">
+                <ScalarProperty Name="ACQGameMode1" ColumnName="ACQGameMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACQHotelChains">
+            <EntityTypeMapping TypeName="DemoAppModel.ACQHotelChain">
+              <MappingFragment StoreEntitySet="ACQHotelChain">
+                <ScalarProperty Name="ACQHotelChainId" ColumnName="ACQHotelChainId" />
+                <ScalarProperty Name="HotelChainName" ColumnName="HotelChainName" />
+                <ScalarProperty Name="HotelChainColor" ColumnName="HotelChainColor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACQPlayers">
+            <EntityTypeMapping TypeName="DemoAppModel.ACQPlayer">
+              <MappingFragment StoreEntitySet="ACQPlayer">
+                <ScalarProperty Name="ACQPlayerId" ColumnName="ACQPlayerId" />
+                <ScalarProperty Name="ACQGameId" ColumnName="ACQGameId" />
+                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACQPlayerStocks">
+            <EntityTypeMapping TypeName="DemoAppModel.ACQPlayerStock">
+              <MappingFragment StoreEntitySet="ACQPlayerStock">
+                <ScalarProperty Name="ACQPlayerStockId" ColumnName="ACQPlayerStockId" />
+                <ScalarProperty Name="ACQPlayerId" ColumnName="ACQPlayerId" />
+                <ScalarProperty Name="ACQHotelChainId" ColumnName="ACQHotelChainId" />
+                <ScalarProperty Name="StockCount" ColumnName="StockCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACQStockholderInfoes">
+            <EntityTypeMapping TypeName="DemoAppModel.ACQStockholderInfo">
+              <MappingFragment StoreEntitySet="ACQStockholderInfo">
+                <ScalarProperty Name="ACQStockholderInfoId" ColumnName="ACQStockholderInfoId" />
+                <ScalarProperty Name="ACQHotelChainId" ColumnName="ACQHotelChainId" />
+                <ScalarProperty Name="SizeFrom" ColumnName="SizeFrom" />
+                <ScalarProperty Name="SizeTo" ColumnName="SizeTo" />
+                <ScalarProperty Name="StockPrice" ColumnName="StockPrice" />
+                <ScalarProperty Name="PrimaryHolder" ColumnName="PrimaryHolder" />
+                <ScalarProperty Name="SecondaryHolder" ColumnName="SecondaryHolder" />
+                <ScalarProperty Name="TertiaryHolder" ColumnName="TertiaryHolder" />
+                <ScalarProperty Name="ACQGameMode" ColumnName="ACQGameMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="DemoAppModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="ApplicationDescription" ColumnName="ApplicationDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

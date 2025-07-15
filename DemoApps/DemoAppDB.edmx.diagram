@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e04f3ff832994570a61f5301ffd58c56" Name="Diagram1">
+        <EntityTypeShape EntityType="DemoAppModel.ACQBuildingCount" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAppModel.ACQGame" Width="1.5" PointX="1.5" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAppModel.ACQGameMode" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAppModel.ACQHotelChain" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAppModel.ACQPlayer" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAppModel.ACQPlayerStock" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAppModel.ACQStockholderInfo" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoAppModel.Application" Width="1.5" PointX="5.75" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="DemoAppModel.FK_ACQBuildingCount_ACQGame" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoAppModel.FK_ACQBuildingCount_ACQHotelChain" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoAppModel.FK_ACQPlayer_ACQGame" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoAppModel.FK_ACQPlayerStock_ACQHotelChain" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoAppModel.FK_ACQStockholderInfo_ACQHotelChain" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoAppModel.FK_ACQPlayerStock_ACQPlayer" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

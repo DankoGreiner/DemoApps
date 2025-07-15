@@ -43,7 +43,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -69,6 +77,13 @@
   <ItemGroup>
     <Content Include="Acquire\Default.aspx" />
     <Content Include="Acquire\Pages\Default.aspx" />
+    <Content Include="Acquire\Pages\Images\American.png" />
+    <Content Include="Acquire\Pages\Images\Continental.png" />
+    <Content Include="Acquire\Pages\Images\Festival.png" />
+    <Content Include="Acquire\Pages\Images\Imperial.png" />
+    <Content Include="Acquire\Pages\Images\Sackson.png" />
+    <Content Include="Acquire\Pages\Images\Tower.png" />
+    <Content Include="Acquire\Pages\Images\Worldwide.png" />
     <Content Include="css\blog-home.css" />
     <Content Include="css\bootstrap-chosen.css" />
     <Content Include="css\bootstrap-lightbox.css" />
@@ -264,6 +279,16 @@
     <Content Include="css\timepicker\bootstrap-timepicker.css" />
     <Content Include="css\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Default.aspx" />
+    <Content Include="DemoAppDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DemoAppDB.Context.cs</LastGenOutput>
+      <DependentUpon>DemoAppDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="DemoAppDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DemoAppDB.edmx</DependentUpon>
+      <LastGenOutput>DemoAppDB.cs</LastGenOutput>
+    </Content>
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -632,6 +657,27 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ACQBuildingCount.cs">
+      <DependentUpon>DemoAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACQGame.cs">
+      <DependentUpon>DemoAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACQGameMode.cs">
+      <DependentUpon>DemoAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACQHotelChain.cs">
+      <DependentUpon>DemoAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACQPlayer.cs">
+      <DependentUpon>DemoAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACQPlayerStock.cs">
+      <DependentUpon>DemoAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACQStockholderInfo.cs">
+      <DependentUpon>DemoAppDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Acquire\ACQMaster.Master.cs">
       <DependentUpon>ACQMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -646,12 +692,16 @@
     <Compile Include="Acquire\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Acquire\Model\HotelChainData.cs" />
     <Compile Include="Acquire\Pages\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Acquire\Pages\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application.cs">
+      <DependentUpon>DemoAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Code\DataAccess.cs" />
     <Compile Include="Default.aspx.cs">
@@ -660,6 +710,21 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DemoAppDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DemoAppDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DemoAppDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DemoAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DemoAppDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DemoAppDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -695,6 +760,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <EntityDeploy Include="DemoAppDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DemoAppDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DemoAppDB.edmx.diagram">
+      <DependentUpon>DemoAppDB.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -706,6 +778,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
