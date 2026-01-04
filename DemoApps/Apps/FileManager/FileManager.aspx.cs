@@ -45,7 +45,11 @@ namespace YourApp.FileManager
                 Response.End();
             }
             if (!IsPostBack)
+            {
                 BindGrid();
+                SetBuildTime();
+
+            }
         }
 
         private void BindGrid()
@@ -143,6 +147,14 @@ namespace YourApp.FileManager
             {
                 var relPath = (e.CommandArgument ?? "").ToString();
 
+                if (e.CommandName == "DeleteFolder")
+                {
+                    Svc.DeleteFolder(relPath);
+                    ShowMsg("Folder deleted: " + relPath);
+                    BindGrid();
+                    return;
+                }
+
                 if (e.CommandName == "DeleteFile")
                 {
                     Svc.DeleteFile(relPath);
@@ -180,6 +192,19 @@ namespace YourApp.FileManager
                 ShowMsg("Action failed: " + ex.Message);
             }
         }
+
+        private void SetBuildTime()
+        {
+            var asm = System.Reflection.Assembly.GetExecutingAssembly();
+            var path = asm.Location;
+
+            if (System.IO.File.Exists(path))
+            {
+                var dt = System.IO.File.GetLastWriteTime(path);
+                lblBuildTime.Text = "Build: " + dt.ToString("yyyy-MM-dd HH:mm");
+            }
+        }
+
 
         protected string GetFileIcon(string fileName)
         {

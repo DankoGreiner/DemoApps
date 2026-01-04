@@ -249,5 +249,33 @@ namespace YourApp.FileManager
 
             File.Move(physical, newPhysical);
         }
+
+        public void DeleteFolder(string relativePath)
+        {
+            relativePath = (relativePath ?? "").Replace('\\', '/').Trim('/');
+
+            // Map safely under root
+            var root = _server.MapPath("~/Apps/FileManager/Files");
+            var target = System.IO.Path.GetFullPath(System.IO.Path.Combine(root, relativePath));
+
+            if (!target.StartsWith(System.IO.Path.GetFullPath(root), StringComparison.OrdinalIgnoreCase))
+                throw new Exception("Invalid folder path.");
+
+            if (!System.IO.Directory.Exists(target))
+                throw new Exception("Folder not found.");
+
+            // Safety: do NOT allow deleting root folder
+            if (string.Equals(System.IO.Path.GetFullPath(root).TrimEnd('\\', '/'),
+                              target.TrimEnd('\\', '/'),
+                              StringComparison.OrdinalIgnoreCase))
+                throw new Exception("Root folder cannot be deleted.");
+
+            // Default: only empty folder
+            if (System.IO.Directory.EnumerateFileSystemEntries(target).Any())
+                throw new Exception("Folder is not empty.");
+
+            System.IO.Directory.Delete(target, recursive: false);
+        }
+
     }
 }

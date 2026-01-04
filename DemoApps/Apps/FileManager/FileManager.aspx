@@ -6,6 +6,8 @@
 <html>
 <head runat="server">
     <title>File Manager</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📁</text></svg>">
+
     <style>
         body {
             font-family: Arial;
@@ -22,7 +24,7 @@
         }
 
         .small {
-            width: 320px;
+            width: 160px;
         }
 
         .msg {
@@ -55,7 +57,7 @@
 
         .icon {
             display: inline-block;
-            width: 18px;
+            width: 20px;
             text-align: center;
             font-size: 16px;
             line-height: 1;
@@ -75,10 +77,21 @@
         .actions-right {
             text-align: right;
         }
+
+        .build-time {
+            position: absolute;
+            top: 10px;
+            right: 16px;
+            font-size: 12px;
+            color: #666;
+            font-family: Consolas, monospace;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:Label runat="server" ID="lblBuildTime" CssClass="build-time" />
+
 
         <h2>File Manager</h2>
         <hr />
@@ -86,7 +99,7 @@
         <asp:Panel runat="server" ID="pnlMsg" CssClass="msg" Visible="true">
             <asp:Label runat="server" ID="lblMsg" />
         </asp:Panel>
-
+        <hr />
         <div class="row actions-row">
 
             <!-- Upload (left) -->
@@ -106,8 +119,7 @@
                 <asp:TextBox runat="server"
                     ID="txtNewFolder"
                     CssClass="small"
-                    Visible="false"
-                    placeholder="New folder name" />
+                    Visible="false" />
                 <asp:Button runat="server"
                     ID="btnCreateFolder"
                     Text="Create Folder"
@@ -136,26 +148,17 @@
 
             <Columns>
 
-                <asp:BoundField DataField="Type" HeaderText="Type" />
+                <%--<asp:BoundField DataField="Type" HeaderText="Type" />--%>
 
 
-                <asp:TemplateField HeaderText="">
+                <asp:TemplateField HeaderText="" ItemStyle-Width="32px" HeaderStyle-Width="32px">
                     <ItemTemplate>
-
-                        <%-- Folder icon --%>
-                        <asp:PlaceHolder runat="server" Visible='<%# Eval("Type").ToString() == "Folder" %>'>
-                            <span class="icon" title="Folder">📁</span>
-                        </asp:PlaceHolder>
-
-                        <%-- File icons by extension --%>
-                        <asp:PlaceHolder runat="server" Visible='<%# Eval("Type").ToString() == "File" %>'>
-                            <span class="icon" title='<%# Eval("Name") %>'>
-                                <%# GetFileIcon(Eval("Name").ToString()) %>
-                            </span>
-                        </asp:PlaceHolder>
-
+                        <span class="icon">
+                            <%# Eval("Type").ToString() == "Folder" ? "📁" : GetFileIcon(Eval("Name").ToString()) %>
+                        </span>
                     </ItemTemplate>
                 </asp:TemplateField>
+
 
 
                 <%-- NAME (clickable for folders) --%>
@@ -201,6 +204,16 @@
                 <asp:TemplateField HeaderText="Actions">
                     <ItemTemplate>
 
+                        <%-- Folder actions --%>
+                        <asp:PlaceHolder runat="server" Visible='<%# Eval("Type").ToString() == "Folder" %>'>
+                            <asp:LinkButton runat="server"
+                                CommandName="DeleteFolder"
+                                CommandArgument='<%# Eval("RelativePath") %>'
+                                Text="Delete folder"
+                                OnClientClick="return confirm('Delete this folder? (Folder must be empty)');" />
+                        </asp:PlaceHolder>
+
+                        <%-- File actions --%>
                         <asp:PlaceHolder runat="server" Visible='<%# Eval("Type").ToString() == "File" %>'>
 
                             <asp:LinkButton runat="server"
@@ -211,20 +224,20 @@
 
                             &nbsp;|&nbsp;
 
-                    <asp:PlaceHolder runat="server" Visible='<%# IsRenaming(Eval("RelativePath")) %>'>
-                        <asp:TextBox runat="server" ID="txtRename" CssClass="small" Text='<%# Eval("Name") %>' />
-                        &nbsp;
-                    </asp:PlaceHolder>
+            <asp:PlaceHolder runat="server" Visible='<%# IsRenaming(Eval("RelativePath")) %>'>New name:
+                <asp:TextBox runat="server" ID="txtRename" CssClass="small" />
+                &nbsp;|&nbsp;
+            </asp:PlaceHolder>
 
                             <asp:LinkButton runat="server"
                                 CommandName="RenameToggle"
                                 CommandArgument='<%# Eval("RelativePath") %>'
                                 Text='<%# RenameButtonText(Eval("RelativePath")) %>' />
-
                         </asp:PlaceHolder>
 
                     </ItemTemplate>
                 </asp:TemplateField>
+
 
             </Columns>
         </asp:GridView>
@@ -234,7 +247,7 @@
     <script>
         (function () {
             var fu = document.getElementById('<%= fuUpload.ClientID %>');
-        var btn = document.getElementById('<%= btnUpload.ClientID %>');
+            var btn = document.getElementById('<%= btnUpload.ClientID %>');
 
             if (!fu || !btn) return;
 
