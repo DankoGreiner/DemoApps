@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -35,6 +35,7 @@ namespace YourApp.FileManager
         {
             return IsRenaming(relativePathObj) ? "Save" : "Rename";
         }
+
         private FileManagerService Svc => new FileManagerService(Server, Request);
 
         protected void Page_Load(object sender, EventArgs e)
@@ -47,7 +48,6 @@ namespace YourApp.FileManager
                 BindGrid();
         }
 
-
         private void BindGrid()
         {
             var folder = CurrentFolderRel;
@@ -57,9 +57,6 @@ namespace YourApp.FileManager
 
             gvItems.DataSource = Svc.ListFolder(folder);
             gvItems.DataBind();
-
-            // set upload target default to current folder
-            //txtUploadFolder.Text = folder;
 
             // show/hide Up button
             btnUp.Visible = !string.IsNullOrEmpty(folder);
@@ -72,19 +69,20 @@ namespace YourApp.FileManager
             Response.Redirect("FileManager.aspx?p=" + Server.UrlEncode(parent));
         }
 
-
         private void ShowMsg(string text)
         {
             pnlMsg.Visible = true;
             lblMsg.Text = Server.HtmlEncode(text);
         }
 
+        // ✅ NEW: upload into current folder
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             try
             {
-                //var rel = Svc.SaveUpload(fuUpload.PostedFile, txtUploadFolder.Text);
-                var rel = Svc.SaveUpload(fuUpload.PostedFile, string.Empty);
+                var folder = CurrentFolderRel; // "" or "Sub/Folder"
+                var rel = Svc.SaveUpload(fuUpload.PostedFile, folder);
+
                 ShowMsg("Uploaded: " + rel);
                 BindGrid();
             }
@@ -138,6 +136,7 @@ namespace YourApp.FileManager
             var idx = rel.LastIndexOf('/');
             return idx <= 0 ? "" : rel.Substring(0, idx);
         }
+
         protected void gvItems_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
@@ -179,6 +178,59 @@ namespace YourApp.FileManager
             catch (Exception ex)
             {
                 ShowMsg("Action failed: " + ex.Message);
+            }
+        }
+
+        protected string GetFileIcon(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+                return "📄";
+
+            var dot = fileName.LastIndexOf('.');
+            var ext = dot >= 0 ? fileName.Substring(dot + 1).ToLowerInvariant() : "";
+
+            switch (ext)
+            {
+                case "pdf": return "📕";
+                case "doc":
+                case "docx": return "🟦"; // Word-like
+                case "xls":
+                case "xlsx":
+                case "csv": return "🟩"; // Excel-like
+                case "ppt":
+                case "pptx": return "🟧"; // PowerPoint-like
+
+                case "zip":
+                case "rar":
+                case "7z": return "🗜️";
+
+                case "jpg":
+                case "jpeg":
+                case "png":
+                case "gif":
+                case "webp": return "🖼️";
+
+                case "mp3":
+                case "wav":
+                case "flac": return "🎵";
+
+                case "mp4":
+                case "mov":
+                case "avi":
+                case "mkv": return "🎞️";
+
+                case "txt":
+                case "md":
+                case "log": return "📝";
+
+                case "html":
+                case "htm":
+                case "css":
+                case "js":
+                case "json":
+                case "xml": return "💻";
+
+                default: return "📄";
             }
         }
 

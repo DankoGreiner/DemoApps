@@ -60,15 +60,6 @@ namespace YourApp.FileManager
         protected global::System.Web.UI.WebControls.Button btnUpload;
 
         /// <summary>
-        /// btnCreateFolder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCreateFolder;
-
-        /// <summary>
         /// txtNewFolder control.
         /// </summary>
         /// <remarks>
@@ -76,6 +67,15 @@ namespace YourApp.FileManager
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNewFolder;
+
+        /// <summary>
+        /// btnCreateFolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCreateFolder;
 
         /// <summary>
         /// lblCurrentFolder control.
