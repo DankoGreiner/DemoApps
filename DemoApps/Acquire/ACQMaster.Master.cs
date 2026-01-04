@@ -99,7 +99,7 @@ namespace DemoApps.Acquire
 
             AddCss("css/bootstrap-chosen.css");
 
-            AddCss("css/TenisLiga.css", true);
+            AddCss("css/DemoApp.css", true);
 
             AddCss("css/font-awesome.min.css");
             AddCss("css/ionicons.min.css");

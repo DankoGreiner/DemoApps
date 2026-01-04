@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Acquire/ACQMaster.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="DemoApps.Acquire.Pages.Default" %>
+﻿<%@ Page Title="ACQUIRE game helper" Language="C#" MasterPageFile="~/Acquire/ACQMaster.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="DemoApps.Acquire.Pages.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="server">
 </asp:Content>
@@ -6,7 +6,8 @@
 
     <asp:UpdatePanel ID="updMain" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            AACCQQUUIIRREE
+            ACQUIRE game helper
+
  <hr />
             <asp:GridView ID="gvGameList" runat="server" Visible="false"></asp:GridView>
             <hr />
@@ -14,7 +15,7 @@
             <table border="0">
                 <tr>
                     <td align="center">
-                        <b>Hotels</b>
+                        <b>Hotel</b>
                     </td>
                     <td></td>
                     <td width="30px"></td>

@@ -13,11 +13,11 @@ namespace DemoApps
 {
     public class DataAccess
     {
-        public static string RolesConnectionString
+        public static string TenisLigaConnectionString
         {
             get
             {
-                return ConfigurationManager.ConnectionStrings["RolesConnectionString"].ConnectionString;
+                return ConfigurationManager.ConnectionStrings["TenisLigaConnectionString"].ConnectionString;
                 //return RPAConnectionString;
             }
         }
