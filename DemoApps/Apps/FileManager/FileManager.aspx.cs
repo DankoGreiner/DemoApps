@@ -42,7 +42,9 @@ namespace YourApp.FileManager
         {
             if (Session["Login"] == null)
             {
-                Response.End();
+                Response.Redirect("~/");
+
+                //Response.End();
             }
             if (!IsPostBack)
             {

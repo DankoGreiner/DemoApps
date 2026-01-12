@@ -91,6 +91,7 @@
     <Content Include="Acquire\Pages\Images\Worldwide.png" />
     <Content Include="Apps\FileManager\FileManager.aspx" />
     <Content Include="Apps\FileManager\README.txt" />
+    <Content Include="Apps\Insta\Insta.aspx" />
     <Content Include="Apps\Whapi\DemoWhapi.aspx" />
     <Content Include="css\blog-home.css" />
     <Content Include="css\bootstrap-chosen.css" />
@@ -728,6 +729,14 @@
       <DependentUpon>FileManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Apps\FileManager\FileManagerService.cs" />
+    <Compile Include="Apps\Insta\Insta.aspx.cs">
+      <DependentUpon>Insta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Apps\Insta\Insta.aspx.designer.cs">
+      <DependentUpon>Insta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Apps\Insta\InstagramStoryConverter.cs" />
     <Compile Include="Apps\Whapi\DemoWhapi.aspx.cs">
       <DependentUpon>DemoWhapi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
