@@ -729,6 +729,7 @@
       <DependentUpon>FileManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Apps\FileManager\FileManagerService.cs" />
+    <Compile Include="Apps\Insta\ImageFooterWriter.cs" />
     <Compile Include="Apps\Insta\Insta.aspx.cs">
       <DependentUpon>Insta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

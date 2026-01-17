@@ -33,6 +33,15 @@ namespace DemoApps.Apps.Insta
         protected global::System.Web.UI.WebControls.Label lblBinaryString;
 
         /// <summary>
+        /// txtComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComment;
+
+        /// <summary>
         /// hidBinaryString control.
         /// </summary>
         /// <remarks>

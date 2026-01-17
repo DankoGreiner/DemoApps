@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text;
 using System.Drawing;
+using static System.Net.Mime.MediaTypeNames;
 
 
 
@@ -25,7 +26,7 @@ namespace DemoApps.Apps.Insta
             if (!IsPostBack)
             {
                 txtRename.Focus();
-                DeleteFilesOlderThan24Hours("Upload");
+                DeleteFilesOlderThan24Hours(Server.MapPath("Upload"));
             }
         }
 
@@ -68,6 +69,8 @@ namespace DemoApps.Apps.Insta
                 string filePathInsta = filePath.Replace(".png", "_insta.png");
                 string fileNameInsta = fileName.Replace(".png", "_insta.png");
                 InstagramStoryConverter.ConvertToStory(filePath, filePathInsta, Color.Black);
+                if(!string.IsNullOrEmpty(txtComment.Text))
+                    ImageFooterWriter.AddFooterTextInPlace_Multiline(filePathInsta, txtComment.Text);
 
 
                 lblBinaryString.Text = Request.Url.AbsoluteUri.Replace(Request.Url.LocalPath, string.Empty);
